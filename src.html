@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8">
+<!-- build:v2-hub -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#120c1c">
+<title>許晴偵探事務所｜事務所總選單</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b0812;color:#f3ead8;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;min-height:100vh;overflow-x:hidden}
+.bgfx{position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 70% at 80% 0%,#5a2a6e55,transparent 60%),radial-gradient(90% 60% at 0% 100%,#b3121f33,transparent 60%),repeating-linear-gradient(90deg,#ffffff05 0 2px,transparent 2px 60px),linear-gradient(#1a1226,#0b0812)}
+.bgfx::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 9px,#ffffff06 9px 10px)}
+.sp{position:fixed;width:3px;height:3px;border-radius:50%;background:#ffe9b0;box-shadow:0 0 8px #ffd27a;animation:fl 6s linear infinite;opacity:0;z-index:-1}
+@keyframes fl{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-60vh);opacity:0}}
+header{position:relative;padding:calc(18px + env(safe-area-inset-top)) 18px 0;min-height:300px;overflow:hidden}
+.por{position:absolute;right:-30px;bottom:0;height:290px;filter:drop-shadow(0 0 18px #c46a1288);animation:in .9s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes in{from{transform:translateX(60px);opacity:0}}
+.plate{display:inline-block;border:2px solid #d6b36a;padding:4px 10px;font-size:12px;letter-spacing:3px;color:#d6b36a;background:#0008}
+h1{font-size:34px;line-height:1.15;margin-top:12px;letter-spacing:2px;text-shadow:0 0 14px #ff7a3a,0 3px 0 #000;max-width:62%}
+h1 small{display:block;font-size:15px;letter-spacing:6px;color:#ffcf8a;text-shadow:none;margin-top:6px}
+.bub{position:relative;margin-top:18px;max-width:64%;background:#fffaf0;color:#2b2418;border-radius:14px;padding:10px 12px;font-size:14px;line-height:1.55;box-shadow:4px 4px 0 #d6b36a;z-index:2}
+.bub b{color:#b3121f}
+#mus{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;z-index:5;width:42px;height:42px;border-radius:50%;border:1px solid #fff5;background:#0009;color:#fff;font-size:20px}
+#mus.off{opacity:.45;text-decoration:line-through}
+main{padding:6px 14px calc(30px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+h2{font-size:17px;letter-spacing:4px;margin:20px 2px 10px;color:#ffcf8a;display:flex;align-items:center;gap:8px}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#ffcf8a88,transparent)}
+.card{position:relative;display:block;text-decoration:none;color:inherit;border-radius:16px;overflow:hidden;margin-bottom:14px;border:1px solid #ffffff22;box-shadow:0 8px 24px #000a;transform:skewY(-1.2deg);animation:up .6s both;transition:transform .2s}
+.card:active{transform:skewY(-1.2deg) scale(.98)}
+@keyframes up{from{opacity:0;transform:translateY(30px) skewY(-1.2deg)}}
+.card .cv{height:150px;background-size:cover;background-position:center;position:relative}
+.card .cv::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 30%,#0b0812)}
+.card .no{position:absolute;top:10px;left:10px;z-index:2;background:var(--c);color:#fff;font-weight:800;font-size:12px;letter-spacing:2px;padding:4px 10px;transform:skewX(-12deg)}
+.card .st{position:absolute;top:10px;right:10px;z-index:2;font-size:12px;padding:4px 10px;border-radius:999px;background:#000a;border:1px solid #fff4}
+.card .st.ok{background:#1f7a3a;border-color:#7dffa6;box-shadow:0 0 10px #7dffa699}
+.card .rk{position:absolute;right:14px;top:84px;z-index:3;font:900 62px/1 Georgia,serif;color:#ffd75e;text-shadow:0 0 18px #ff9a1f,3px 3px 0 #000;transform:rotate(-8deg)}
+.card .bd{padding:4px 14px 14px;background:#0b0812;transform:skewY(1.2deg)}
+.card h3{font-size:20px;margin-bottom:4px;text-shadow:0 0 10px var(--c)}
+.card p{font-size:13.5px;line-height:1.6;color:#d9cfbd}
+.card .go{margin-top:8px;font-size:13px;color:var(--c2);font-weight:700}
+.lock{border-style:dashed;opacity:.85}
+.lock .cv{background:repeating-linear-gradient(45deg,#1c1528 0 14px,#231a33 14px 28px);display:flex;align-items:center;justify-content:center;font-size:44px}
+.lock .cv::after{display:none}
+.lock .knock{display:inline-block;margin-top:8px;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid #ffcf8a66;background:none;color:#ffcf8a}
+.lock.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-6px) skewY(-1.2deg)}75%{transform:translateX(6px) skewY(-1.2deg)}}
+.board{background:#2a2016;border:6px solid #5a4126;border-radius:10px;padding:14px;box-shadow:inset 0 0 30px #000c}
+.board .row{display:flex;gap:10px}
+.clue{flex:1;background:#efe5cc;color:#3a3020;border-radius:4px;padding:10px 8px;text-align:center;font-size:12.5px;line-height:1.45;transform:rotate(var(--r));position:relative;filter:grayscale(1) brightness(.45);transition:filter .6s}
+.clue::before{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#b3121f;box-shadow:0 2px 2px #0008}
+.clue.on{filter:none;box-shadow:0 0 18px #9fc3ff88}
+.clue svg{width:64px;height:44px;display:block;margin:0 auto 4px;background:#1f2a3c;border-radius:6px;padding:3px}
+.board .cap{margin-top:12px;font-size:13px;color:#e8d9b8;text-align:center;line-height:1.6}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#fffaf0;color:#2b2418;padding:10px 16px;border-radius:12px;font-size:14px;box-shadow:4px 4px 0 #d6b36a;opacity:0;transition:opacity .3s;pointer-events:none;max-width:88%}
+.toast.on{opacity:1}
+footer{text-align:center;font-size:11px;color:#8a7f70;margin-top:16px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.sp{display:none}}
+</style></head><body><div class="bgfx"></div>
+<header><button id="mus" aria-label="音樂開關">♪</button>
+<img class="por" src="{{ME}}" alt="許晴">
+<span class="plate">許晴偵探事務所</span>
+<h1>事務所<br>總選單<small>CASE FILES</small></h1>
+<div class="bub" id="bub">歡迎來到事務所！<br>桌上的卷宗，挑一份吧。</div></header>
+<main>
+<h2>📂 案件卷宗</h2>
+<a class="card" id="c-laojie" href="https://k80734539.github.io/laojie-mystery/" style="--c:#c46a12;--c2:#ffb15e;animation-delay:.1s">
+ <div class="cv" style="background-image:url({{STREET}})"></div><span class="no">案件一</span><span class="st" data-g="laojie">未偵破</span><span class="rk" data-r="laojie"></span>
+ <div class="bd"><h3>老街迷香</h3><p>颱風夜停電的老街，百年糕餅店「福記」的老闆深夜昏睡不醒，開發商正逼人簽字賣店。許晴回到阿嬤的老街，接下了第一件委託。</p><div class="go">▶ 翻開卷宗</div></div></a>
+<a class="card" id="c-wusuo" href="https://k80734539.github.io/wusuo-villa/" style="--c:#b3121f;--c2:#ff6a76;animation-delay:.2s">
+ <div class="cv" style="background-image:url({{EXT}})"></div><span class="no">案件二</span><span class="st" data-g="wusuo">未偵破</span><span class="rk" data-r="wusuo"></span>
+ <div class="bd"><h3>霧鎖山莊・紅傘之怨</h3><p>被颱風封閉的山中莊園、走廊上的紅傘、二十年前的婚禮。推理社的密室之謎，由周予安揭開。</p><div class="go">▶ 翻開卷宗</div></div></a>
+<a class="card" id="c-yeshi" href="https://k80734539.github.io/yeshi-mystery/" style="--c:#d1361e;--c2:#ffb15e;animation-delay:.3s">
+ <div class="cv" style="background-image:url({{YS}})"></div><span class="no">案件三</span><span class="st" data-g="yeshi">未偵破</span><span class="rk" data-r="yeshi"></span>
+ <div class="bd"><h3>夜市無聲</h3><p>福安夜市的會長倒在上鎖的冷凍貨櫃裡，失蹤的攤販不知去向。許晴與周予安，在停電倒數之下追查謊言。</p><div class="go">▶ 翻開卷宗</div></div></a>
+<div class="card lock" data-k="案件四：連許晴都還不知道內容。敬請期待！" style="--c:#555;animation-delay:.4s">
+ <div class="cv">❔</div><span class="no">案件四</span><span class="st">準備中</span>
+ <div class="bd"><h3>？？？</h3><p>空白的卷宗夾。也許某天會有人敲門。</p><button class="knock">✊ 敲敲期待</button></div></div>
+<h2>☁️ 雲嶺開發 線索板</h2>
+<div class="board"><div class="row">
+ <div class="clue" id="k-laojie" style="--r:-3deg">{{SVG}}<b>名片</b><br><span>案件一・老街</span></div>
+ <div class="clue" id="k-wusuo" style="--r:2.5deg">{{SVG}}<b>土地讓渡書</b><br><span>案件二・山莊</span></div>
+ <div class="clue" id="k-yeshi" style="--r:-1.5deg">{{SVG}}<b>採購名單</b><br><span>案件三・夜市</span></div>
+</div><div class="cap" id="cap">在案件中找到印著雲朵標誌的東西，<br>線索就會釘上這塊板子。</div></div>
+<footer>原創作品・進度存在這台裝置上</footer>
+</main><div class="toast" id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);const ls=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const G={laojie:'laojie',wusuo:'wusuo',yeshi:'yeshi'};let cl=0,cnt=0;
+for(const g in G){const best=(()=>{try{return JSON.parse(ls(g+'_best')||'null')}catch(e){return null}})();const clear=ls(g+'_clear')==='1'||!!best;
+ const st=$(`[data-g="${g}"]`);if(clear){cl++;st.textContent='✔ 已偵破';st.classList.add('ok');if(best&&best.rk)$(`[data-r="${g}"]`).textContent=best.rk;}
+ else if(Object.keys(localStorage).some(k=>k.startsWith(g+'_')&&k!==g+'_bgm'))st.textContent='調查中…';
+ if(ls(g+'_cloud')==='1'){cnt++;$('#k-'+g).classList.add('on')}}
+$('#bub').innerHTML=cl>=3?'三件案子全破了！<br>三份文件上，都印著同一朵<b>雲</b>。':cl===2?'兩件案子都破了！<br>不過……那個<b>雲朵標誌</b>，一直讓我很在意。':cl===1?'第一件辦得不錯！<br>下一份卷宗也拜託你了。':'歡迎來到事務所！<br>桌上的卷宗，挑一份吧。';
+$('#cap').innerHTML=cnt>=3?'三個案子，三張紙，同一個<b>雲嶺開發</b>。<br>老街、山莊、夜市……他們到底想要什麼？':cnt===0?'在案件中找到印著雲朵標誌的東西，<br>線索就會釘上這塊板子。':cnt===1?'找到一條線索了。<br>另一個案子裡，也許還藏著同樣的標誌……':cnt===2?'兩個案子都出現了<b>雲嶺開發</b>。<br>二十年前的事，和老街的土地……是同一隻手？':'';
+window.__hub={cl,cnt};
+const T=$('#toast');let tt;document.querySelectorAll('.lock').forEach(c=>c.onclick=()=>{c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');knock();T.textContent='叩叩！'+c.dataset.k;T.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>T.classList.remove('on'),2600)});
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)for(let i=0;i<14;i++){const s=document.createElement('i');s.className='sp';s.style.left=Math.random()*100+'vw';s.style.top=60+Math.random()*50+'vh';s.style.animationDelay=Math.random()*6+'s';document.body.appendChild(s)}
+// ambient music
+let AC=null,on=ls('hub_bgm')!=='off',tm=null,step=0;const mb=$('#mus');
+const N=[0,3,7,10,12,7,5,3],R=[220,174.6,196,164.8];
+function note(f,t,d,v,ty){const o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.05);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.1)}
+function loop(){if(!on||!AC)return;const t=AC.currentTime+.05,r=R[Math.floor(step/8)%4];if(step%8===0){note(r/2,t,4,.05,'sine');note(r*1.5,t,4,.025,'triangle')}note(r*2*Math.pow(2,N[step%8]/12),t,.9,.035,'triangle');step++;tm=setTimeout(loop,500)}
+function knock(){if(!AC)return;const t=AC.currentTime;note(140,t,.12,.15,'square');note(140,t+.15,.12,.15,'square')}
+function start(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();clearTimeout(tm);if(on)loop()}catch(e){}}
+function ui(){mb.classList.toggle('off',!on)}ui();
+document.addEventListener('pointerdown',()=>{if(!AC)start()},{once:true});
+mb.onclick=e=>{e.stopPropagation();on=!on;try{localStorage.setItem('hub_bgm',on?'on':'off')}catch(e){};ui();clearTimeout(tm);start()};
+</script></body></html>
