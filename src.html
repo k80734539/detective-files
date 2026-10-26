@@ -52,6 +52,17 @@ h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#ffcf8a8
 .toast.on{opacity:1}
 footer{text-align:center;font-size:11px;color:#8a7f70;margin-top:16px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.sp{display:none}}
+.night{display:none;width:100%;margin-top:14px;padding:13px 10px;border-radius:14px;border:1px solid #ffcf8a88;background:linear-gradient(#3a2a52,#1d1530);color:#ffe9b0;font-size:16px;letter-spacing:2px;box-shadow:0 0 18px #9a6fd055}
+.night.on{display:block}
+#scn{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;justify-content:flex-end;background:radial-gradient(120% 80% at 50% 20%,#2b1f3d,#0b0812 70%)}
+#scn.on{display:flex}
+#scn .doc{position:absolute;left:50%;top:14%;transform:translateX(-50%);width:min(86%,420px);display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#scn .doc i{font-style:normal;background:#efe5cc;color:#3a3020;padding:8px 10px;border-radius:4px;font-size:12.5px;transform:rotate(var(--r,0deg));box-shadow:0 4px 10px #000a}
+#scn .doc i::after{content:"☁";display:block;text-align:right;color:#7a8fb8;font-size:14px}
+#scn .box{margin:0 14px calc(18px + env(safe-area-inset-bottom));min-height:150px;border:2px solid #d6b36a;border-radius:16px;background:#120c1ce6;padding:12px 14px;font-size:16px;line-height:1.7}
+#scn .who{display:inline-block;margin:-26px 0 6px;padding:2px 12px;border-radius:12px;background:#d6b36a;color:#2b2418;font-weight:700;font-size:14px}
+#scn .nx{text-align:right;color:#ffcf8a;font-size:14px}
+#scn .sk{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;padding:6px 12px;border-radius:12px;border:1px solid #fff5;background:#0009;color:#fff;font-size:13px}
 </style></head><body><div class="bgfx"></div>
 <header><button id="mus" aria-label="音樂開關">♪</button>
 <img class="por" src="{{ME}}" alt="許晴">
@@ -78,6 +89,8 @@ footer{text-align:center;font-size:11px;color:#8a7f70;margin-top:16px}
  <div class="clue" id="k-wusuo" style="--r:2.5deg">{{SVG}}<b>土地讓渡書</b><br><span>案件二・山莊</span></div>
  <div class="clue" id="k-yeshi" style="--r:-1.5deg">{{SVG}}<b>採購名單</b><br><span>案件三・夜市</span></div>
 </div><div class="cap" id="cap">在案件中找到印著雲朵標誌的東西，<br>線索就會釘上這塊板子。</div></div>
+<button class="night" id="nightBtn">📜 深夜的事務所</button>
+<div id="scn"><button class="sk" id="scnSk">略過 ▶</button><div class="doc" id="scnDoc"></div><div class="box" id="scnBox"></div></div>
 <footer>原創作品・進度存在這台裝置上</footer>
 </main><div class="toast" id="toast"></div>
 <script>
@@ -90,6 +103,39 @@ for(const g in G){const best=(()=>{try{return JSON.parse(ls(g+'_best')||'null')}
 $('#bub').innerHTML=cl>=3?'三件案子全破了！<br>三份文件上，都印著同一朵<b>雲</b>。':cl===2?'兩件案子都破了！<br>不過……那個<b>雲朵標誌</b>，一直讓我很在意。':cl===1?'第一件辦得不錯！<br>下一份卷宗也拜託你了。':'歡迎來到事務所！<br>桌上的卷宗，挑一份吧。';
 $('#cap').innerHTML=cnt>=3?'三個案子，三張紙，同一個<b>雲嶺開發</b>。<br>老街、山莊、夜市……他們到底想要什麼？':cnt===0?'在案件中找到印著雲朵標誌的東西，<br>線索就會釘上這塊板子。':cnt===1?'找到一條線索了。<br>另一個案子裡，也許還藏著同樣的標誌……':cnt===2?'兩個案子都出現了<b>雲嶺開發</b>。<br>二十年前的事，和老街的土地……是同一隻手？':'';
 window.__hub={cl,cnt};
+/* ending scene: after all three cases are cleared and all three cloud clues are lit */
+const NIGHT=[
+['','三份文件，攤在桌上。'],['','一張名片。一份土地讓渡書。一份採購名單。每一份的角落，都印著同一朵雲。'],
+['許晴','老街、山莊、夜市……三個地方，三個人，同一朵雲。'],
+['','我把它們排成一列，才發現一件事。'],
+['許晴','三份文件，措辭一模一樣。「為了您好」「為了大家好」「為了這裡好」。'],
+['許晴','不是巧合。是同一套說法，一個人教出來的。'],
+['','門口，傳來兩下很輕的敲門聲。'],
+['周予安','……打擾。我路過。'],['許晴','你的外套都濕了，不像路過。'],
+['周予安','（把筆記本放在桌上）我把三件案子的時間，排了一遍。'],
+['周予安','山莊，二十年前，處理完畢。夜市，十年前，簽了三十一份。老街，更早。'],
+['周予安','不是各自為政。是有人，一個地方、一個地方，慢慢往外擴。'],
+['許晴','你為什麼這麼在意雲嶺？'],
+['','他沉默了一下，把筆記本翻到最後一頁。'],
+['周予安','……我媽的店，也有一朵雲。'],
+['周予安','我那時候十五歲，不懂為什麼她簽了字，隔天，就把鑰匙放在桌上。'],
+['周予安','記錄只能寫發生了什麼。寫不了，她那天晚上，是什麼表情。'],
+['','我想起阿嬤，也是這樣。'],['許晴','……我阿嬤，也是。'],
+['','我們誰都沒再說話。雨聲，變得很清楚。'],
+['','我從口袋裡，拿出那張匿名的紙條。'],
+['許晴','這張紙條，從夜市起，就一直跟著我。你看一下這個字。'],
+['周予安','（仔細看了很久）字跡不是社長的。我對過。'],
+['周予安','但是，這個字，我在別的地方，見過。'],['許晴','哪裡？'],
+['周予安','……我想起來，再告訴妳。'],
+['','卷宗櫃最上面那一格，不知什麼時候，多了一個空白的資料夾。上面，沒有標題。']];
+const nightOk=cl>=3&&cnt>=3,nightSeen=()=>ls('hub_night')==='1';
+function applyCase4(){const c=document.querySelector('.card.lock');if(!c||!nightSeen())return;c.querySelector('h3').textContent='第四份卷宗：雲嶺';c.querySelector('p').textContent='桌上多了一個沒有標題的資料夾。字跡的主人，還沒有出現。';c.querySelector('.cv').textContent='☁️';c.dataset.k='案件四：還在準備中。雲朵底下，還有一個人。'}
+(()=>{const b=$('#nightBtn'),sc=$('#scn'),box=$('#scnBox'),dc=$('#scnDoc');if(nightOk)b.classList.add('on');applyCase4();let i=0;
+ const draw=()=>{const [w,t]=NIGHT[i];box.innerHTML=(w?`<div class="who">${w}</div><br>`:'')+t+'<div class="nx">▼</div>'};
+ const end=()=>{sc.classList.remove('on');try{localStorage.setItem('hub_night','1')}catch(e){}applyCase4()};
+ b.onclick=()=>{i=0;dc.innerHTML='<i style="--r:-4deg">名片</i><i style="--r:2deg">土地讓渡書</i><i style="--r:-2deg">採購名單</i>';sc.classList.add('on');draw()};
+ box.onclick=()=>{i++;if(i>=NIGHT.length)end();else draw()};$('#scnSk').onclick=end;window.__night={open:()=>b.click(),len:NIGHT.length}})();
+
 const T=$('#toast');let tt;document.querySelectorAll('.lock').forEach(c=>c.onclick=()=>{c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');knock();T.textContent='叩叩！'+c.dataset.k;T.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>T.classList.remove('on'),2600)});
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches)for(let i=0;i<14;i++){const s=document.createElement('i');s.className='sp';s.style.left=Math.random()*100+'vw';s.style.top=60+Math.random()*50+'vh';s.style.animationDelay=Math.random()*6+'s';document.body.appendChild(s)}
 // ambient music
